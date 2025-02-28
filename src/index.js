@@ -1,5 +1,7 @@
 // index.js
 import express from 'express';
+import cors from 'cors';
+import userRouter from './routes/user-router.js';
 
 
 
@@ -9,11 +11,12 @@ const port = 3000;
 
 //staattinen html sivusto tarjoillaan palvelimen juuressa
 app.use('/', express.static('public'));
+app.use(cors());
 
 // middleware, joka lukee json datan post pyyntöjen rungostasta
 app.use(express.json());
 
-
+app.use('/api/users', userRouter);
 
 
 
