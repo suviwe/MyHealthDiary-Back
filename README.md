@@ -1,8 +1,8 @@
-### Yksilöprojekti Suvi Westerberg  MyHealthDiary
+# Yksilöprojekti Suvi Westerberg  MyHealthDiary
 
 
 ## komentoja hauille, testattu Postmanilla
-# Käyttäjän rekisteröinti
+### Käyttäjän rekisteröinti
 POST http://localhost:3000/api/users/
 lisää kenttään esim
 {
@@ -11,7 +11,7 @@ lisää kenttään esim
   "password": "newsecurepassword"
 }
 
-# Kirjaudu sisään
+### Kirjaudu sisään
 POST http://localhost:3000/api/users/login
 {
   "username": "updateduser",
@@ -19,7 +19,7 @@ POST http://localhost:3000/api/users/login
 }
 
 saat tokenin, kopioi se ja katso omat tiedot:
-# Katso omat tietosi
+### Katso omat tietosi
 GET http://localhost:3000/api/users/me
 Authorization Bearer <your token>
 
