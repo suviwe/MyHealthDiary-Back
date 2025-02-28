@@ -18,6 +18,21 @@ CREATE TABLE Users (
     user_level VARCHAR(10) DEFAULT 'regular'
 );
 
+CREATE TABLE DiaryEntries (
+    entry_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    entry_date DATE NOT NULL,
+    mood VARCHAR(50),
+    mood_intensity INT CHECK (mood_intensity BETWEEN 1 AND 5), -- tehdään fronttiin hymiöt tai liukusäädin
+    weight DECIMAL(5,2),
+    sleep_hours INT,
+    water_intake INT,
+    steps INT,
+    notes TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
 
 CREATE TABLE ActivityLogs (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
