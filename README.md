@@ -35,6 +35,9 @@ Authorization Bearer <your token>
  DELETE http://localhost:3000/api/diary/1
  GET http://localhost:3000/api/diary/stats/sleep
 
+ POST http://localhost:3000/api/activity
+ GET http://localhost:3000/api/activity
+ PUT http://localhost:3000/api/activity/1
 
 
 
