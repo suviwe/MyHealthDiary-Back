@@ -21,15 +21,15 @@ diaryRouter
   .post(
     authenticateToken,
     body('entry_date').notEmpty().isDate(),
-    body('mood').notEmpty().isLength({min: 3, max: 50}),
-    body('mood_intensity').optional().isInt({ min: 1, max: 5 }).withMessage('Mood intensity must be between 1 and 5'),
-    body('weight').isNumeric(),
-    body('sleep_hours').isFloat({min: 0, max: 24}).withMessage("Sleep hours must be between 0 and 24"),
-    body('water_intake').isNumeric().withMessage("Water intake must be a valid number in ml")
+    body('mood').optional().isLength({min: 2, max: 50}),
+    body('mood_intensity').notEmpty().isInt({ min: 1, max: 5 }).withMessage('Mood intensity must be between 1 and 5'),
+    body('weight').optional().isNumeric(),
+    body('sleep_hours').optional().isFloat({min: 0, max: 24}).withMessage("Sleep hours must be between 0 and 24"),
+    body('water_intake').optional().isNumeric().withMessage("Water intake must be a valid number in ml")
     .custom(value => value >= 1 && value < 10000)  // rajaus 0-10000 ml (max 10 litraa)
     .withMessage("Water intake must be between 1 and 10000 ml"),
-    body('steps').isNumeric(),
-    body('notes').isLength({max: 1500}).escape(),
+    body('steps').optional().isNumeric(),
+    body('notes').optional().isLength({max: 1500}).escape(),
     validationErrorHandler,
     postEntry
   );
@@ -41,14 +41,14 @@ diaryRouter
     .put(
       authenticateToken,
       body("entry_date").optional(),
-      body("mood").optional().isLength({ min: 3, max: 50 }).trim().escape(),
+      body("mood").optional().isLength({ min: 2, max: 50 }).trim().escape(),
       body('mood_intensity').optional().isInt({ min: 1, max: 5 }).withMessage('Mood intensity must be between 1 and 5'),
       body("weight").optional().isFloat({ min: 2, max: 200 }),
       body("sleep_hours").optional().isFloat({ min: 0, max: 24 }),
-      body('water_intake').isNumeric().withMessage("Water intake must be a valid number in ml")
+      body('water_intake').optional().isNumeric().withMessage("Water intake must be a valid number in ml")
       .custom(value => value >= 1 && value < 10000)  // rajaus 1-10000 ml (max 10 litraa)
       .withMessage("Water intake must be between 1 and 10000 ml"),
-      body('steps').isNumeric(),
+      body('steps').optional().isNumeric(),
       body("notes").optional().isLength({ max: 1500 }).trim().escape(),
       validationErrorHandler,
       putEntry)

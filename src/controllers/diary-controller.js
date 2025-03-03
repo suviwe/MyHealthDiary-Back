@@ -2,6 +2,7 @@ import { customError } from "../middlewares/error-handler.js";
 import { getEntriesForUser, addEntry, updateEntry, deleteEntryById, fetchSleepStats, fetchWaterStats, fetchStepsStats } from "../models/diary-model.js";
 
 
+
 const getEntries = async (req, res, next) => {
   try {
     const user_id = req.user.user_id; // Haetaan käyttäjä-ID tokenista
@@ -38,7 +39,7 @@ const getEntryById = async (req, res, next) => {
 
 
 const postEntry = async (req, res, next) => {
-  // user_id, entry_date, mood, weight, sleep_hours, notes
+  //
   const newEntry = req.body;
   newEntry.user_id = req.user.user_id;
   try {
@@ -48,6 +49,7 @@ const postEntry = async (req, res, next) => {
     next(error);
   }
 };
+
 
 const putEntry = async (req, res, next) => {
   try {

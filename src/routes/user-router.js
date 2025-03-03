@@ -22,8 +22,9 @@ userRouter
 
   //body funktio on middleware. isAlphaNumeric tarkoittaa että ei saa olla mitään erikoismerkkejä
   .post(
-    body('username').trim().isLength({min: 3, max: 20}).isAlphanumeric(),
-    body('password').trim().isLength({min: 3, max: 120}),
+    body('username').trim().isLength({min: 6, max: 20}).isAlphanumeric(),
+    body('password').trim().isLength({min: 8, max: 50}).matches(/^(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ])(?=.*[\d!@#$%^&*(),.?":{}|<>]).+$/)
+    .withMessage('Salasana täytyy sisältää vähintään yksi iso ja pieni kirjain, sekä joko numero tai erikoismerkki'),
     body('email').trim().isEmail(),
     validationErrorHandler,
     registerUser
@@ -35,8 +36,9 @@ userRouter
   //.get(findUserById)
   .put(
     authenticateToken,
-    body('username').trim().isLength({min: 3, max: 20}).isAlphanumeric(),
-    body('password').trim().isLength({min: 3, max: 120}),
+    body('username').trim().isLength({min: 6, max: 20}).isAlphanumeric(),
+    body('password').trim().isLength({min: 8, max: 50}).matches(/^(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ])(?=.*[\d!@#$%^&*(),.?":{}|<>]).+$/)
+    .withMessage('Salasana täytyy sisältää vähintään yksi iso ja pieni kirjain, sekä joko numero tai erikoismerkki'),
     body('email').trim().isEmail(),
     validationErrorHandler,
     editUser
