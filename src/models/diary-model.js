@@ -74,6 +74,7 @@ const updateEntry = async (id, entry) => {
 };
 
 
+
 /**
  * Poistetaan merkintä entry_id perusteella vain, jos käyttäjä omistaa sen.
  * @param {number} entryId - Poistettavan merkinnän ID
