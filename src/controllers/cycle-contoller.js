@@ -1,4 +1,4 @@
-import { insertMenstrualCycle, modifyMenstrualCycle, fetchAverageCycleLength, fetchCycleLengths, fetchOvulationDate, findMenstrualCyclesByUserId } from "../models/cycle-model.js";
+import { insertMenstrualCycle, modifyMenstrualCycle, fetchAverageCycleLength, fetchAverageMenstruationLength,  fetchOvulationDate, findMenstrualCyclesByUserId } from "../models/cycle-model.js";
 import { customError } from "../middlewares/error-handler.js"; // custom error for consistent error handling
 
 /**
@@ -65,7 +65,7 @@ const updateMenstrualCycle = async (req, res, next) => {
 /**
  * Hakee keskimääräisen kierron pituuden
  */
-const getAverageCycleLength = async (req, res, next) => {
+const getTrueAverageCycleLength = async (req, res, next) => {
   try {
     const userId = req.user.user_id;
     const stats = await fetchAverageCycleLength(userId);
@@ -73,9 +73,10 @@ const getAverageCycleLength = async (req, res, next) => {
     if (stats.error) {
       return next(customError(stats.error, 500)); // custom error handling
     }
+    console.log("Backend paluttaa keskimääräisen kierron pituuden:", stats);
 
     res.status(200).json({
-      message: `Keskimääräinen kierron pituus on ${parseFloat(stats.avg_cycle_length).toFixed(1)} päivää.`,
+      message: `Keskimääräinen kierto  ${parseFloat(stats.avg_cycle_length).toFixed(1)} päivää.`,
       avg_cycle_length: parseFloat(stats.avg_cycle_length).toFixed(1)
     });
   } catch (error) {
@@ -83,10 +84,31 @@ const getAverageCycleLength = async (req, res, next) => {
   }
 };
 
-/**
- * Hakee kaikki kiertojen pituudet
- */
-const getAllCycleLengths = async (req, res, next) => {
+
+//keston pituus
+const getAverageMenstruationLength  = async (req, res, next) => {
+  try {
+    const userId = req.user.user_id;
+    const stats = await fetchAverageMenstruationLength(userId); //
+
+    if (stats.error) {
+      return next(customError(stats.error, 500));
+    }
+
+    res.status(200).json({
+      message: `Keskimääräinen kuukautisten kesto on ${parseFloat(stats.avg_menstruation_length).toFixed(1)} päivää.`,
+      avg_menstruation_length: parseFloat(stats.avg_menstruation_length).toFixed(1)
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
+
+
+/*const getAllCycleLengths = async (req, res, next) => {
   try {
     const userId = req.user.user_id;
     const cycles = await fetchCycleLengths(userId);
@@ -99,9 +121,9 @@ const getAllCycleLengths = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+};*/
 
-/**
+/*
  * Hakee kaikki kuukautiskierron merkinnät
  */
 const getAllCycles = async (req, res, next) => {
@@ -138,8 +160,8 @@ const getOvulationDates = async (req, res, next) => {
 };
 
 export {
-  getAverageCycleLength,
-  getAllCycleLengths,
+  getAverageMenstruationLength,
+  getTrueAverageCycleLength,
   getOvulationDates,
   addMenstrualCycle,
   updateMenstrualCycle,

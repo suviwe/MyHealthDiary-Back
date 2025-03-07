@@ -100,8 +100,7 @@ const getSleepStats = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-    //console.error("Error fetching sleep stats:", error);
-    //res.status(500).json({ error: "Database error" });
+    
   }
 };
 

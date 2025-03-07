@@ -36,6 +36,7 @@ const registerUser = async (req, res, next) => {
 const userLogin = async (req, res, next) => {
 
   console.log('userLogin:',  req.body)
+
   const username = req.body.username;
   const password = req.body.password;
 
@@ -50,9 +51,11 @@ const userLogin = async (req, res, next) => {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
       const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN,});
+      delete user.password;
       console.log('user is found', user);
-      return res.json({message: 'Käyttäjä löytyy ja tiedot ovat oikein', user, token});
 
+      return res.json({message: 'Käyttäjä löytyy ja tiedot ovat oikein', user, token});
+      
     }
   }
     next (customError('Bad username/password', 401));

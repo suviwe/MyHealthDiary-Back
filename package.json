@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
+    "apidoc" : "apidoc -i src/ -o docs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,6 +15,16 @@
   },
   "author": "Suvi",
   "license": "ISC",
+  "apidoc": {
+  "title": "My API docs",
+  "name": "Suvin Api docs",
+  "description": "MyHealthDiary",
+  "url": "https://localhost:3000/api",
+  "order": [
+    "Authentication",
+    "User"
+  ]
+},
   "bugs": {
     "url": "https://github.com/suviwe/MyHealthDiary-Back/issues"
   },
@@ -27,6 +38,7 @@
     "prettier": "3.5.2"
   },
   "dependencies": {
+    "apidoc": "^1.2.0",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",

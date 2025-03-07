@@ -21,6 +21,8 @@ app.use(cors());
 // middleware, joka lukee json datan post pyyntöjen rungostasta
 app.use(express.json());
 
+app.use('/api', express.static('docs'));
+
 app.use('/api/users', userRouter);
 app.use('/api/diary', diaryRouter);
 app.use('/api/activity', activityRouter);

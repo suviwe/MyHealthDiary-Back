@@ -15,6 +15,99 @@ import { validationErrorHandler } from '../middlewares/error-handler.js';
 
 const diaryRouter = express.Router();
 
+/**
+  * @api {get} /api/diary Hae käyttäjän päiväkirjamerkinnät
+  * @apiName GetEntries
+  * @apiGroup Päiväkirja
+  * @apiPermission token
+  *
+  * @apiHeader {String} Authorization Bearer token.
+  *
+  * @apiSuccess {Object[]} entries Lista käyttäjän merkinnöistä.
+  * @apiSuccess {Number} entries.entry_id Merkinnän ID.
+  * @apiSuccess {Number} entries.user_id Käyttäjän ID.
+  * @apiSuccess {String} entries.entry_date Päivämäärä (YYYY-MM-DD).
+  * @apiSuccess {String} entries.mood Mieliala.
+  * @apiSuccess {Number} entries.mood_intensity Mielialan intensiteetti (1-5).
+  * @apiSuccess {Number} entries.weight Paino (kg).
+  * @apiSuccess {Number} entries.sleep_hours Nukutut tunnit.
+  * @apiSuccess {Number} entries.water_intake Juotu vesi (ml).
+  * @apiSuccess {Number} entries.steps Otetut askeleet.
+  * @apiSuccess {String} entries.notes Muistiinpanot.
+  * @apiSuccess {String} entries.created_at Merkinnän luontiaika.
+  *
+  * @apiSuccessExample {json} Response-Example:
+  *     HTTP/1.1 200 OK
+  *     [
+  *       {
+  *         "entry_id": 60,
+  *         "user_id": 15,
+  *         "entry_date": "2025-03-06",
+  *         "mood": "ihan hyvä",
+  *         "mood_intensity": 3,
+  *         "weight": "554.00",
+  *         "sleep_hours": 7,
+  *         "water_intake": 1000,
+  *         "steps": 10050,
+  *         "notes": "projektin tekoa",
+  *         "created_at": "2025-03-07T08:12:34.000Z"
+  *       }
+  *     ]
+  *
+  * @apiError NoEntries Käyttäjällä ei ole merkintöjä.
+  * @apiErrorExample {json} Error-Response:
+  *     HTTP/1.1 404 Not Found
+  *     {
+  *       "message": "Ei merkintöjä löytynyt"
+  *     }
+  *
+  */
+
+/**
+ * @api {post} /api/diary Lisää uusi päiväkirjamerkintä
+ * @apiName PostEntry
+ * @apiGroup Päiväkirja
+ * @apiPermission token
+ *
+ * @apiHeader {String} Authorization Bearer token.
+ *
+ * @apiBody {String} entry_date Päivämäärä (pakollinen, YYYY-MM-DD).
+ * @apiBody {String} [mood] Mieliala (valinnainen, max 50 merkkiä).
+ * @apiBody {Number} mood_intensity Mielialan voimakkuus (1-5, pakollinen).
+ * @apiBody {Number} [weight] Paino (kg, valinnainen, numero).
+ * @apiBody {Number} [sleep_hours] Unen määrä (0-24 tuntia, valinnainen).
+ * @apiBody {Number} [water_intake] Juotu vesi (ml, valinnainen, max 10 litraa).
+ * @apiBody {Number} [steps] Otetut askeleet (valinnainen, numero).
+ * @apiBody {String} [notes] Muistiinpanot (max 1500 merkkiä, valinnainen).
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "entry_date": "2025-03-07",
+ *       "mood": "ihan hyvä",
+ *       "mood_intensity": 3,
+ *       "weight": 55,
+ *       "sleep_hours": 8,
+ *       "water_intake": 1500,
+ *       "steps": 10000,
+ *       "notes": "Hyvä päivä."
+ *     }
+ *
+ * @apiSuccess {String} message "Entry added."
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 201 Created
+ *     {
+ *       "message": "Entry added."
+ *     }
+ *
+ * @apiError ValidationError Jos jokin pakollinen kenttä puuttuu tai virheellinen.
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "message": "Mood intensity must be between 1 and 5"
+ *     }
+ */
+
 diaryRouter
   .route('/')
   .get(authenticateToken, getEntries)
@@ -34,7 +127,80 @@ diaryRouter
     postEntry
   );
 
+
     //hakee yksittäisen merkinnän ID perusteella, päivittää merkinnän, poistaa merkinnän
+
+   /**
+ * @api {put} /api/diary/:id Muokkaa päiväkirjamerkintää
+ * @apiName PutEntry
+ * @apiGroup Päiväkirja
+ * @apiPermission token
+ *
+ * @apiHeader {String} Authorization Bearer token.
+ *
+ * @apiParam {Number} id Merkinnän ID, joka muokataan.
+ *
+ * @apiBody {String} [entry_date] Päivämäärä (YYYY-MM-DD, valinnainen).
+ * @apiBody {String} [mood] Mieliala (max 50 merkkiä, valinnainen).
+ * @apiBody {Number} [mood_intensity] Mielialan voimakkuus (1-5, valinnainen).
+ * @apiBody {Number} [weight] Paino (kg, valinnainen, numero).
+ * @apiBody {Number} [sleep_hours] Unen määrä (0-24 tuntia, valinnainen).
+ * @apiBody {Number} [water_intake] Juotu vesi (ml, valinnainen, max 10 litraa).
+ * @apiBody {Number} [steps] Otetut askeleet (valinnainen, numero).
+ * @apiBody {String} [notes] Muistiinpanot (max 1500 merkkiä, valinnainen).
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "mood": "Parempi päivä",
+ *       "mood_intensity": 4,
+ *       "sleep_hours": 8,
+ *       "notes": "Nukuin hyvin ja olo on energinen."
+ *     }
+ *
+ * @apiSuccess {String} message "merkintä päivitetty."
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "message": "merkintä päivitetty"
+ *     }
+ *
+ * @apiError NotFound Jos merkintää ei löydy tai käyttäjällä ei ole oikeuksia muokata sitä.
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "Entry not found or update failed"
+ *     }
+ */
+/**
+ * @api {delete} /api/diary/:id Poista päiväkirjamerkintä
+ * @apiName DeleteEntry
+ * @apiGroup Päiväkirja
+ * @apiPermission token
+ *
+ * @apiHeader {String} Authorization Bearer token.
+ *
+ * @apiParam {Number} id Merkinnän uniikki ID, joka poistetaan.
+ *
+ * @apiParamExample {json} Request-Example:
+ *     DELETE /api/diary/25
+ *
+ * @apiSuccess {String} message "Merkintä poistettu onnistuneesti."
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "message": "Merkintä poistettu onnistuneesti."
+ *     }
+ *
+ * @apiError NotFound Jos merkintää ei löydy tai käyttäjällä ei ole oikeuksia poistaa sitä.
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "Merkintää ei löytynyt tai sinulla ei ole oikeuksia poistaa sitä."
+ *     }
+ */
+
     diaryRouter
     .route('/:id')
     .get(authenticateToken, getEntryById)
@@ -54,8 +220,60 @@ diaryRouter
       putEntry)
 
     .delete(authenticateToken, deleteEntry);
+/**
+ * @api {get} /api/diary/stats/sleep Hae uni-tilastot
+ * @apiName GetSleepStats
+ * @apiGroup Tilastot
+ * @apiPermission token
+ *
+ * @apiHeader {String} Authorization Bearer token.
+ *
+ * @apiSuccess {String} message Keskimääräinen unen määrä
+ * @apiSuccess {Number} avg_sleep Keskimääräinen unen määrä.
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "message": "Uni tilastosi mukaan nukut keskimäärin 7.5 tuntia per yö.",
+ *       "avg_sleep": 7.5
+ *     }
+ *
+ * @apiError Unauthorized Jos käyttäjä ei ole kirjautunut sisään.
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 401 Unauthorized
+ *     {
+ *       "message": "Unauthorized"
+ *     }
+ */
 
   diaryRouter.get('/stats/sleep', authenticateToken, getSleepStats);
+
+/**
+ * @api {get} /api/diary/stats/steps Hae askeltilastot
+ * @apiName GetStepsStats
+ * @apiGroup Tilastot
+ * @apiPermission token
+ *
+ * @apiHeader {String} Authorization Bearer token.
+ *
+ * @apiSuccess {String} message Keskimääräinen päivittäinen askelmäärä.
+ * @apiSuccess {Number} avg_steps Keskimääräiset askeleet.
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "message": "Askeleet tilastosi mukaan kuljet keskimäärin 8500 askelta per päivä.",
+ *       "avg_steps": 8500
+ *     }
+ *
+ * @apiError Unauthorized Jos käyttäjä ei ole kirjautunut sisään.
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 401 Unauthorized
+ *     {
+ *       "message": "Unauthorized"
+ *     }
+ */
+
   diaryRouter.get('/stats/steps', authenticateToken, getStepsStats);
   diaryRouter.get('/stats/water', authenticateToken, getWaterStats);
 

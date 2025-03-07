@@ -57,11 +57,6 @@ const updateEntry = async (id, entry) => {
     UPDATE DiaryEntries
     SET mood = ?, mood_intensity = ?, weight = ?, sleep_hours = ?, water_intake = ?, steps = ?, notes = ?
     WHERE entry_id = ?`;
-/*const updateEntry = async (id, entry) => {
-  const { mood, weight, sleep_hours, notes } = entry;
-  const sql = `UPDATE DiaryEntries
-               SET mood = ?, weight = ?, sleep_hours = ?, notes = ?
-               WHERE entry_id = ?`;*/
 
   try {
     const rows = await promisePool.query(sql, [mood, mood_intensity, weight, sleep_hours, water_intake, steps, notes, id]);

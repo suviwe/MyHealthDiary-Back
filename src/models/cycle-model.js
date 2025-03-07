@@ -85,35 +85,66 @@ const findMenstrualCyclesByUserId = async (userId) => {
   }
 };
 
-// Lasketaan keskimääräinen kierron pituus
+
 const fetchAverageCycleLength = async (userId) => {
   try {
-    const [result] = await promisePool.query(
-      'SELECT AVG(cycle_length) AS avg_cycle_length FROM MenstrualCycle WHERE user_id = ?',
+    const [cycles] = await promisePool.query(
+      'SELECT start_date FROM MenstrualCycle WHERE user_id = ? ORDER BY start_date ASC',
       [userId]
     );
+
+    if (!cycles || cycles.length < 2) {
+      return { error: "Ei tarpeeksi tietoa kierron laskemiseen" };
+    }
+
+    // Lasketaan kierron pituus peräkkäisten start_date-arvojen erotuksena
+    const cycleLengths = [];
+    for (let i = 0; i < cycles.length - 1; i++) {
+      const currentStart = new Date(cycles[i].start_date);
+      const nextStart = new Date(cycles[i + 1].start_date);
+      const cycleLength = (nextStart - currentStart) / (1000 * 60 * 60 * 24); // Erotus päivissä
+      cycleLengths.push(cycleLength);
+    }
+
+    console.log("Lasketut kierron pituudet:", cycleLengths); // Debuggaus
+
+    if (cycleLengths.length === 0) {
+      return { error: "Ei tarpeeksi tietoa kierron laskemiseen" };
+    }
+
+    // Lasketaan keskiarvo
+    const avgCycleLength = cycleLengths.reduce((a, b) => a + b, 0) / cycleLengths.length;
+
     return {
-      avg_cycle_length: result[0]?.avg_cycle_length || 0
+      avg_cycle_length: avgCycleLength.toFixed(1)
     };
   } catch (error) {
-    console.error("Error fetching average cycle length:", error);
-    return { error: "Database error" };
+    console.error("Virhe laskettaessa keskimääräistä kierron pituutta:", error);
+    return { error: "Tietokantavirhe" };
   }
 };
 
-// Hakee kaikki kiertojen pituudet
-const fetchCycleLengths = async (userId) => {
+
+
+
+const fetchAverageMenstruationLength = async (userId) => {
   try {
     const [result] = await promisePool.query(
-      'SELECT cycle_length FROM MenstrualCycle WHERE user_id = ?',
+      'SELECT AVG(cycle_length) AS avg_menstruation_length FROM MenstrualCycle WHERE user_id = ?',
       [userId]
     );
-    return result;
+
+    return {
+      avg_menstruation_length: result[0]?.avg_menstruation_length || 0
+    };
   } catch (error) {
-    console.error("Error fetching cycle lengths:", error);
-    return { error: "Database error" };
+    console.error("Virhe haettaessa keskimääräistä kuukautisten kestoa:", error);
+    return { error: "Tietokantavirhe" };
   }
 };
+
+
+
 
 // Lasketaan ovulaatiopäivä
 const fetchOvulationDate = async (userId) => {
@@ -139,4 +170,4 @@ const fetchOvulationDate = async (userId) => {
   }
 };
 
-export { fetchAverageCycleLength, fetchCycleLengths, fetchOvulationDate, insertMenstrualCycle, modifyMenstrualCycle, findMenstrualCyclesByUserId };
+export { fetchAverageCycleLength, fetchAverageMenstruationLength, fetchOvulationDate, insertMenstrualCycle, modifyMenstrualCycle, findMenstrualCyclesByUserId };
