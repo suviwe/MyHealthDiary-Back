@@ -130,6 +130,14 @@ Authorization Bearer <your token>
 ### Yhteystiedot
 ![Yhteystiedot](images/yhteystiedot.png)
 
+## Käytetyt teknologiat ja kirjastot
+- **Backend**: Node.js, Express.js, MySQL, JWT (JSON Web Token), bcrypt
+- **Frontend**: Vite, CSS, JavaScript, HTML
+- **Tietokanta**: MySQL
+- **Api-dokumentaatio**: apidoc
+- **HTTP-pyynnöt**: Postiman
+- **Versionhallinta**: GitHub
+
 
 
 
