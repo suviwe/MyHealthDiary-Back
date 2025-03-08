@@ -7,6 +7,10 @@ Tämä on MyHealthDiary-sovelluksen backend. Sovellus auttaa käyttäjiä seuraa
 - **API (Back-end)**: [http://localhost:3000](http://localhost:3000)
 - **API-dokumentaatio (Apidoc)**: [http://localhost:3000/api](http://localhost:3000/api)
 
+## Tietokantakaavio
+Alla on sovelluksen tietokantakaavion kuvaan linkkki
+![Tietokantakaavio](images/tietokanta.png)
+
 
 
 ## komentoja hauille, testattu Postmanilla
