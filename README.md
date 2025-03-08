@@ -80,17 +80,17 @@ Authorization Bearer <your token>
  - DELETE http://localhost:3000/api/diary/1
  - GET http://localhost:3000/api/diary/stats/sleep
 
- POST http://localhost:3000/api/activity
- GET http://localhost:3000/api/activity
- PUT http://localhost:3000/api/activity/1
+ - POST http://localhost:3000/api/activity
+ - GET http://localhost:3000/api/activity
+ - PUT http://localhost:3000/api/activity/1
 
 
 ### Kuukautiskierron reittejä en etukäteen testaillut Postmanilla.
-GET http://localhost:3000/api/cycle
-GET http://localhost:3000/api/cycle/stats/average-cycle-length
-GET http://localhost:3000/api/cycle/stats/average-menstruation-length
-POST http://localhost:3000/api/api/cycle
-PUT http://localhost:3000/api/api/cycle/:id
+- GET http://localhost:3000/api/cycle
+- GET http://localhost:3000/api/cycle/stats/average-cycle-length
+- GET http://localhost:3000/api/cycle/stats/average-menstruation-length
+- POST http://localhost:3000/api/api/cycle
+- PUT http://localhost:3000/api/api/cycle/:id
 
 
 ## Kuvakaappaukset
