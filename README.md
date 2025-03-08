@@ -4,6 +4,7 @@ Tämä on MyHealthDiary-sovelluksen backend. Sovellus auttaa käyttäjiä seuraa
 
 ## Linkit
 - **Sovellus (Front-end)**: [http://localhost:5173](http://localhost:5173)
+- **API dokumentaatio live**: [MyHealthDiary-Back API Docs](https://suviwe.github.io/MyHealthDiary-Back/)
 - **API (Back-end)**: [http://localhost:3000](http://localhost:3000)
 - **API-dokumentaatio (Apidoc)**: [http://localhost:3000/api](http://localhost:3000/api)
 
