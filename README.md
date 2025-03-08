@@ -40,5 +40,43 @@ Authorization Bearer <your token>
  PUT http://localhost:3000/api/activity/1
 
 
+## Kuvakaappaukset
+
+
+### Etusivu
+![Etusivu](images/etusivu.png)
+
+### Kirjautuminen
+![Kirjautuminen](images/kirjaudu.png)
+
+### Rekisteröityminen
+![Rekisteröityminen](images/rekisteroidy.png)
+
+### Omat sivut
+![Omat sivut](images/omat-sivut.png)
+
+### Päiväkirja
+![Päiväkirja](images/paivakirja.png)
+
+### Päiväkirjan tilastot
+![Päiväkirjan tilastot](images/paivakirja-stats.png)
+
+### Päiväkirjamerkintä
+![Päiväkirjamerkintä](images/paivakirjamerkinta.png)
+
+### Kuukautiskierto
+![Kuukautiskierto](images/kuukautiskierto.png)
+
+### Kuukautiskierron tilastot
+![Kuukautiskierron tilastot](images/kuukautiskierto-stats.png)
+
+### BMI-laskuri
+![BMI-laskuri](images/bmi.png)
+
+### Yhteystiedot
+![Yhteystiedot](images/yhteystiedot.png)
+
+
+
 
 
