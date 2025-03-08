@@ -7,9 +7,42 @@ Tämä on MyHealthDiary-sovelluksen backend. Sovellus auttaa käyttäjiä seuraa
 - **API (Back-end)**: [http://localhost:3000](http://localhost:3000)
 - **API-dokumentaatio (Apidoc)**: [http://localhost:3000/api](http://localhost:3000/api)
 
-## Tietokantakaavio
-Alla on sovelluksen tietokantakaavion kuvaan linkkki
+## Tietokanta. Tein backendin uudelleen, en siis käytä sitä koulussa tehtyä vaan rakensin uuden niiden ohjeiden avulla.
+
+- **Users**: Käyttäjätiedot ja kirjautumistiedot
+- **DiaryEntries**: Päiväkirjamerkinnät (uni, askeleet, vedenjuonti jne.)
+- **ActivityLogs**: Liikuntamerkinnät (ei toteutettu)
+- **MenstrualCycle**: Kuukautiskierron merkinnät
+
+Alla on sovelluksen tietokantarakenne, joka sisältää taulut ja yhteydet.
 ![Tietokantakaavio](images/tietokanta.png)
+
+## Toteutetut ja toteuttamatta jääneet toiminnot
+## HUOM! Vaikka kaikkia suunniteltuja toimintoja en ehtinyt toteuttaa, tietokantarakenne ja API reittejä on suunniteltu niiden mahdollistamiseksi.
+
+### Toteutetut
+- Etusivu
+- bmi-sivu
+- yhteystiedot sivu (joka ei oikeastaan ole sovelluksessa tärkeä kun ei ole fyysistä lokaatiota mutta tein sen ennenkuin projektin suunnitelma oli täysin selvillä)
+- omat-sivut kirjautuneelle
+- Käyttäjän rekisteröinti ja kirjautuminen
+- Päiväkirjamerkintöjen tekeminen
+- Päiväkirjamerkintöjen muokkaaminen
+- Päiväkirjamerkintöjen poistaminen
+- Kuukautiskierron seuranat/päiväkirja osio
+- Kuukautisten merkinnän lisääminen
+- Kuukautiskierron muokkaaminen
+- Keskimääräisen kuukautisten keston laskeminen
+- Keskimääräisen kierron pituuden laskeminen
+- Sovelluksesta ulos kirjautuminen
+- käytetty modaalia, snackbaria ja alerttia
+
+### Toteuttamatta jääneet
+- Kaikki ActivityLogs tauluun liittyvät ominaisuudet
+- Omien käyttäjätietojen näkeminen/muokkaaminen/poistaminen
+- Kuukautiskiertojen poistaminen
+- Ovulaatio ajan laskeminen / arvioiminen
+- Kaikkea hienosäätöä, käyttäjä ilmoituksia / virheilmoituksia en ehtinyt tekemään, kokoajan tuli uusia juttuja että ainiin tuokin voisi olla noin ja tuossa tuollainen.
 
 
 
@@ -52,7 +85,16 @@ Authorization Bearer <your token>
  PUT http://localhost:3000/api/activity/1
 
 
+### Kuukautiskierron reittejä en etukäteen testaillut Postmanilla.
+GET http://localhost:3000/api/cycle
+GET http://localhost:3000/api/cycle/stats/average-cycle-length
+GET http://localhost:3000/api/cycle/stats/average-menstruation-length
+POST http://localhost:3000/api/api/cycle
+PUT http://localhost:3000/api/api/cycle/:id
+
+
 ## Kuvakaappaukset
+### Alla olevat kuvakaappaukset esittävät sovelluksen eri osia ja toiminnallisuuksia
 
 
 ### Etusivu

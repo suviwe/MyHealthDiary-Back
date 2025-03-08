@@ -10,7 +10,7 @@ const menstrualCycleRouter = express.Router();
 
 
 /**
- * @api {post} /api/cycle Lisää kuukautiskierron merkintä
+ * @api {post} /cycle Lisää kuukautiskierron merkintä
  * @apiName AddMenstrualCycle
  * @apiGroup Kuukautiskierto
  * @apiPermission token
@@ -41,7 +41,7 @@ const menstrualCycleRouter = express.Router();
  *     }
  */
 /**
- * @api {get} /api/cycle Hae kaikki kuukautiskierron merkinnät
+ * @api {get} /cycle Hae kaikki kuukautiskierron merkinnät
  * @apiName GetAllCycles
  * @apiGroup Kuukautiskierto
  * @apiPermission token
@@ -98,7 +98,7 @@ menstrualCycleRouter
 
 
 /**
- * @api {put} /api/cycle/:id Päivitä kuukautiskierron merkintä
+ * @api {put} /cycle/:id Päivitä kuukautiskierron merkintä
  * @apiName UpdateMenstrualCycle
  * @apiGroup Kuukautiskierto
  * @apiPermission token
@@ -145,7 +145,7 @@ menstrualCycleRouter
 
 
 /**
- * @api {get} /api/cycle/stats/average-menstruation-length Hae keskimääräinen kuukautisten kesto
+ * @api {get} /cycle/stats/average-menstruation-length Hae keskimääräinen kuukautisten kesto
  * @apiName GetAverageMenstruationLength
  * @apiGroup Kuukautiskierto
  * @apiPermission token
@@ -175,7 +175,7 @@ menstrualCycleRouter.get('/stats/average-menstruation-length', authenticateToken
 
 
 /**
- * @api {get} /api/cycle/stats/average-cycle-length Hae keskimääräinen kierron pituus
+ * @api {get} /cycle/stats/average-cycle-length Hae keskimääräinen kierron pituus
  * @apiName GetTrueAverageCycleLength
  * @apiGroup Kuukautiskierto
  * @apiPermission token

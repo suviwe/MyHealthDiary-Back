@@ -16,7 +16,7 @@ import { validationErrorHandler } from '../middlewares/error-handler.js';
 const diaryRouter = express.Router();
 
 /**
-  * @api {get} /api/diary Hae käyttäjän päiväkirjamerkinnät
+  * @api {get} /diary Hae käyttäjän päiväkirjamerkinnät
   * @apiName GetEntries
   * @apiGroup Päiväkirja
   * @apiPermission token
@@ -64,7 +64,7 @@ const diaryRouter = express.Router();
   */
 
 /**
- * @api {post} /api/diary Lisää uusi päiväkirjamerkintä
+ * @api {post} /diary Lisää uusi päiväkirjamerkintä
  * @apiName PostEntry
  * @apiGroup Päiväkirja
  * @apiPermission token
@@ -131,7 +131,7 @@ diaryRouter
     //hakee yksittäisen merkinnän ID perusteella, päivittää merkinnän, poistaa merkinnän
 
    /**
- * @api {put} /api/diary/:id Muokkaa päiväkirjamerkintää
+ * @api {put} /diary/:id Muokkaa päiväkirjamerkintää
  * @apiName PutEntry
  * @apiGroup Päiväkirja
  * @apiPermission token
@@ -173,7 +173,7 @@ diaryRouter
  *     }
  */
 /**
- * @api {delete} /api/diary/:id Poista päiväkirjamerkintä
+ * @api {delete} /diary/:id Poista päiväkirjamerkintä
  * @apiName DeleteEntry
  * @apiGroup Päiväkirja
  * @apiPermission token
@@ -221,7 +221,7 @@ diaryRouter
 
     .delete(authenticateToken, deleteEntry);
 /**
- * @api {get} /api/diary/stats/sleep Hae uni-tilastot
+ * @api {get} /diary/stats/sleep Hae uni-tilastot
  * @apiName GetSleepStats
  * @apiGroup Tilastot
  * @apiPermission token
@@ -249,7 +249,7 @@ diaryRouter
   diaryRouter.get('/stats/sleep', authenticateToken, getSleepStats);
 
 /**
- * @api {get} /api/diary/stats/steps Hae askeltilastot
+ * @api {get} /diary/stats/steps Hae askeltilastot
  * @apiName GetStepsStats
  * @apiGroup Tilastot
  * @apiPermission token

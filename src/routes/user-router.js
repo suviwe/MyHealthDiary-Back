@@ -16,7 +16,7 @@ const userRouter = express.Router();
 //all routers to /api/users
 
 /**
- * @api {post} /api/users Rekisteröidy
+ * @api {post} /users Rekisteröidy
  * @apiName RegisterUser
  * @apiGroup Käyttäjät
  * @apiPermission All
@@ -57,7 +57,7 @@ userRouter
     registerUser
   );
 
-//all routes to /api/users/:id
+//all routes to /users/:id
 userRouter
   .route('/:id')
   //.get(findUserById)
@@ -75,7 +75,7 @@ userRouter
 
 
 /**
- * @api {post} /api/users/login Kirjaudu sisään
+ * @api {post} /users/login Kirjaudu sisään
  * @apiName UserLogin
  * @apiGroup Käyttäjät
  * @apiPermission All
