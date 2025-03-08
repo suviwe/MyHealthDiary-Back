@@ -1,5 +1,13 @@
 # Yksilöprojekti Suvi Westerberg  MyHealthDiary
 
+Tämä on MyHealthDiary-sovelluksen backend. Sovellus auttaa käyttäjiä seuraamaan hyvinvointiaan päiväkirjamerkinnöillä ja tilastoilla.
+
+## Linkit
+- **Sovellus (Front-end)**: [http://localhost:5173](http://localhost:5173)
+- **API (Back-end)**: [http://localhost:3000](http://localhost:3000)
+- **API-dokumentaatio (Apidoc)**: [http://localhost:3000/api](http://localhost:3000/api)
+
+
 
 ## komentoja hauille, testattu Postmanilla
 ### Käyttäjän rekisteröinti
