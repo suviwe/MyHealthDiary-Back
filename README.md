@@ -62,13 +62,13 @@ Authorization Bearer <your token>
 ![Päiväkirjan tilastot](images/paivakirja-stats.png)
 
 ### Päiväkirjamerkintä
-![Päiväkirjamerkintä](images/paivakirjamerkinta.png)
+![Päiväkirjamerkintä](images/paivakirjamerkinnat.png)
 
 ### Kuukautiskierto
-![Kuukautiskierto](images/kuukautiskierto.png)
+![Kuukautiskierto](images/kuukautiskierto-etusivu.png)
 
 ### Kuukautiskierron tilastot
-![Kuukautiskierron tilastot](images/kuukautiskierto-stats.png)
+![Kuukautiskierron tilastot](images/kuukautiskalenterin-ominaisuudet.png)
 
 ### BMI-laskuri
 ![BMI-laskuri](images/bmi.png)
