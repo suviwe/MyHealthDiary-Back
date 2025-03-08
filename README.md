@@ -48,7 +48,7 @@ Alla on sovelluksen tietokantarakenne, joka sisältää taulut ja yhteydet.
 
 ## komentoja hauille, testattu Postmanilla
 ### Käyttäjän rekisteröinti
-POST http://localhost:3000/api/users/
+- POST http://localhost:3000/api/users/
 lisää kenttään esim
 {
   "username": "testikayttaja",
@@ -57,7 +57,7 @@ lisää kenttään esim
 }
 
 ### Kirjaudu sisään
-POST http://localhost:3000/api/users/login
+- POST http://localhost:3000/api/users/login
 {
   "username": "testikayttaja",
   "password": "testisalasana"
